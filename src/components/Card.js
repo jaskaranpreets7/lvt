@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 
 class Card extends Component {
+
+
   openModal = () => {
     this.props.openModal();
   };
@@ -12,6 +14,11 @@ class Card extends Component {
   goToManage = () => {
     this.props.goToManage();
   };
+
+  lastName = () => {
+  return (this.props.customerDetails.lastName === undefined)?"":"," + this.props.customerDetails.lastName
+
+  }
 
   totalQuantity = () => {
     let total = 0;
@@ -50,7 +57,6 @@ class Card extends Component {
       let result = this.props.items.items.filter((item)=>{
         return item.age_restricted === true
       })
-
       if(result.length>0){
         for(let i = 0; i <result.length; i++){
           if(result[i].tags.indexOf("Cigarettes") >= 0){
@@ -65,23 +71,21 @@ class Card extends Component {
   }
 
   render() {
-    const { isModal, items } = this.props;
+
+    const { isModal, items,modalWidth } = this.props;
+
     return (
-      <div className="card-container"s>
+      <div className="card-container">
         {isModal ? (
-          <div className="navbar" style={{ paddingLeft: "30px" }}>
+          <div className="navbar" style={{modalWidth}}>
             <p>
-              <p className="close" onClick={this.closeModal} />
+            <div className="close" onClick={this.closeModal} />
               <span>
                 <i className="fa fa-user"></i>
               </span>
             </p>
             <div className="creds">
-              <p>{`${this.props.customerDetails.firstName} ${
-                this.props.customerDetails.lastName === undefined
-                  ? ""
-                  :"," + this.props.customerDetails.lastName
-              }`}</p>
+              <p>{`${this.props.customerDetails.firstName} ${this.lastName()}`}</p>
               <p>{this.props.customerDetails.phone}</p>
             </div>
           </div>
@@ -93,18 +97,12 @@ class Card extends Component {
                 <i className="fa fa-user"></i>
               </span>
             </p>
-
             <div className="creds">
-              <p>{`${this.props.customerDetails.firstName} ${
-                this.props.customerDetails.lastName === undefined
-                  ?""
-                  :"," + this.props.customerDetails.lastName
-              }`}</p>
+              <p>{`${this.props.customerDetails.firstName} ${this.lastName()}`}</p>
               <p>{this.props.customerDetails.phone}</p>
             </div>
           </div>
         )}
-
         <div className="horizontal-separator"></div>
         <div className="items">
           {isModal ? (
@@ -114,24 +112,20 @@ class Card extends Component {
                   <div className="desc">
                     <p>
                       <span>
-                        {item.thumbnail === undefined ? (
-                          <span></span>
-                        ) : (
+                        {item.thumbnail === undefined ? null: 
                           <img
                             className="thumb-img"
                             alt={item.thumbnail}
                             src={item.thumbnail}
                           />
-                        )}{" "}
+                        }{" "}
                         {item.quantity}
                       </span>
                       {item.name === undefined ? item.product_id : item.name}
                     </p>
                   </div>
                   <p className="price">
-                    {item.price !== undefined
-                      ? `$ ${(item.price / 100).toFixed(2)}`
-                      : null}
+                    {item.price !== undefined ? `$ ${(item.price / 100).toFixed(2)}` : null}
                   </p>
                 </div>
               );
@@ -143,9 +137,7 @@ class Card extends Component {
                   <div className="desc">
                     <p>
                       <span>
-                        {item.thumbnail === undefined ? (
-                          <span></span>
-                        ) : (
+                        {item.thumbnail === undefined ? null: (
                           <img
                             className="thumb-img"
                             alt={item.thumbnail}
@@ -158,16 +150,12 @@ class Card extends Component {
                     </p>
                   </div>
                   <p className="price">
-                    {item.price !== undefined
-                      ? `$ ${(item.price / 100).toFixed(2)}`
-                      : null}
+                    {item.price !== undefined ? `$ ${(item.price / 100).toFixed(2)}`: null}
                   </p>
                 </div>
               );
             })
-          ) : (
-            <div></div>
-          )}
+          ) : null }
         </div>
         <div className="horizontal-separator-1"></div>
         <div className="total">
@@ -202,7 +190,6 @@ class Card extends Component {
           {isModal ? (
             <button
               className="details"
-              disabled={true}
               onClick={this.goToManage}
             >
               Manage{" "}

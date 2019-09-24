@@ -76,6 +76,7 @@ body {
       flex-grow: 1; }
 
 .card-container {
+  background: white;
   position: relative;
   box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
   margin-top: 1em;
@@ -97,7 +98,6 @@ body {
       margin: 0.2em 0.5em;
       position: relative !important; }
     .card-container .navbar p:first-child span {
-      z-index: 3;
       position: inherit;
       margin: auto;
       display: block;
@@ -118,7 +118,7 @@ body {
     width: 100%; }
   .card-container .horizontal-separator-1 {
     border: 2px solid #ddd;
-    width: 100%;
+    width: 94%;
     position: absolute;
     bottom: 20%; }
   .card-container .items {
@@ -162,7 +162,7 @@ body {
     color: white;
     font-size: 1.2rem; }
   .card-container .close {
-    position: absolute;
+    position: absolute !important;
     left: 5px;
     top: 7px;
     width: 32px;
@@ -171,7 +171,7 @@ body {
   .card-container .close:hover {
     opacity: 1; }
   .card-container .close:before, .card-container .close:after {
-    position: absolute;
+    position: absolute !important;
     left: 15px;
     content: ' ';
     height: 33px;
@@ -197,105 +197,281 @@ body {
   display: block;
   margin: auto; }
 
-.age-restricted {
-  display: inline-block;
-  position: absolute !important;
-  width: 50%;
-  height: 82px;
-  background: gray;
-  color: white;
-  top: 0;
-  left: 0; }
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
+  background-color: transparent;
+  width: 100%;
+  height: 100%; }
 
-.manage-container {
-  background: white;
+.age-container {
   display: flex;
   flex-direction: column;
+  position: relative;
   width: 100%;
   min-height: 70vh;
-  border-right: 4px solid gray;
-  position: relative; }
-  .manage-container .navbar {
-    background: whitesmoke;
-    padding: 5px;
+  background: white;
+  color: black; }
+
+.age-content {
+  display: block;
+  padding: 5px;
+  position: absolute;
+  top: 15%;
+  left: 22%; }
+
+.screen {
+  width: 165px;
+  height: 17px;
+  padding: 0px 0px 20px 120px;
+  border-bottom: 2px solid grey;
+  margin-bottom: 20px; }
+
+.digits {
+  font-size: 30px; }
+
+.btn {
+  width: 90px;
+  height: 80px;
+  border-radius: 50%;
+  margin: 2px; }
+
+.btn:focus {
+  border: 1px solid black;
+  border-radius: 50%;
+  outline: none; }
+
+.modal-container {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  background: transparent;
+  top: 0;
+  right: 0; }
+
+.modal-body-1 {
+  position: absolute;
+  width: 100%;
+  background-color: transparent;
+  top: 9%;
+  left: 50%; }
+
+.modal-body-1 .card-container {
+  background: white;
+  position: relative;
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+  margin-top: 1em;
+  margin-right: 10px;
+  width: 47%;
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  padding: 0.8em;
+  text-align: center; }
+  .modal-body-1 .card-container .navbar, .modal-body-1 .card-container .horizontal-separator,
+  .modal-body-1 .card-container .items, .modal-body-1 .card-container .total, .modal-body-1 .card-container .details {
+    width: 100%; }
+  .modal-body-1 .card-container .navbar {
     display: flex; }
-    .manage-container .navbar.flex-column {
+    .modal-body-1 .card-container .navbar.flex-column {
       flex-direction: column; }
-    .manage-container .navbar p {
+    .modal-body-1 .card-container .navbar p {
       margin: 0.2em 0.5em;
       position: relative !important; }
-    .manage-container .navbar p:first-child span {
+    .modal-body-1 .card-container .navbar p:first-child span {
       position: inherit;
-      margin: auto;
+      margin: 0px 0px 0px 100px;
       display: block;
       width: 5em;
       height: 5em;
       border: 1px solid white;
       border-radius: 2.5em;
       background: black; }
-      .manage-container .navbar p:first-child span i {
-        padding-left: 14px;
+      .modal-body-1 .card-container .navbar p:first-child span i {
         font-size: 4.5em;
         color: white; }
-    .manage-container .navbar .creds p:nth-child(1) {
+    .modal-body-1 .card-container .navbar .creds p:nth-child(1) {
       font-size: 2rem; }
-    .manage-container .navbar .creds p:nth-child(2) {
+    .modal-body-1 .card-container .navbar .creds p:nth-child(2) {
       font-size: 1.3rem; }
-  .manage-container .horizontal-separator {
+  .modal-body-1 .card-container .horizontal-separator {
+    border: 2px solid #ddd;
+    width: 100%; }
+  .modal-body-1 .card-container .horizontal-separator-1 {
     border: 2px solid #ddd;
     width: 94%;
-    margin-top: 15px;
-    margin-left: 3%; }
-  .manage-container .horizontal-separator-1 {
-    margin-top: 15px;
-    border: 2px solid #ddd;
-    width: 94%;
-    margin-left: 3%;
     position: absolute;
     bottom: 20%; }
-  .manage-container .items {
+  .modal-body-1 .card-container .items {
     max-height: 250px;
     overflow-y: auto; }
-    .manage-container .items .item {
+    .modal-body-1 .card-container .items .item {
       display: flex;
       width: 100%;
       justify-content: space-between; }
-      .manage-container .items .item .desc {
+      .modal-body-1 .card-container .items .item .desc {
         margin-bottom: 0.2em; }
-        .manage-container .items .item .desc span:first-child {
+        .modal-body-1 .card-container .items .item .desc span:first-child {
           margin-right: 1em; }
-      .manage-container .items .item .price {
+      .modal-body-1 .card-container .items .item .price {
         margin-bottom: 0.2em; }
-  .manage-container .close {
+  .modal-body-1 .card-container .thumb-img {
+    width: 50px; }
+  .modal-body-1 .card-container .total {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
     position: absolute;
-    left: 5px;
-    top: 7px;
+    bottom: 7%;
+    left: 0; }
+    .modal-body-1 .card-container .total span {
+      display: block; }
+      .modal-body-1 .card-container .total span.items {
+        font-size: 1.5em; }
+  .modal-body-1 .card-container .button-pos {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    position: absolute;
+    bottom: 0;
+    left: 0; }
+  .modal-body-1 .card-container button {
+    height: 2em;
+    background: #646464;
+    color: white;
+    font-size: 1.2rem; }
+  .modal-body-1 .card-container .close {
+    position: absolute;
+    left: 0px;
+    top: 0px;
     width: 32px;
     height: 32px;
     opacity: 0.3; }
-  .manage-container .close:hover {
+  .modal-body-1 .card-container .close:hover {
     opacity: 1; }
-  .manage-container .close:before, .manage-container .close:after {
+  .modal-body-1 .card-container .close:before, .modal-body-1 .card-container .close:after {
     position: absolute;
     left: 15px;
     content: ' ';
     height: 33px;
     width: 2px;
     background-color: #333; }
-  .manage-container .close:before {
+  .modal-body-1 .card-container .close:before {
     transform: rotate(45deg); }
-  .manage-container .close:after {
+  .modal-body-1 .card-container .close:after {
     transform: rotate(-45deg); }
 
-.grid-container {
-  display: grid;
-  grid-template-columns: auto auto;
-  background-color: white;
-  padding: 10px;
-  width: 98%;
+.modal-body-2 {
+  width: 100%;
   height: 100%;
-  grid-column-gap: 50px; }
+  background-color: transparent; }
 
-.ReactModalPortal .card-container {
-  width: 95%;
-  margin: 0 auto; }
+.modal-body-2.card-container {
+  background: white;
+  position: relative;
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+  margin-top: 1em;
+  margin-right: 10px;
+  width: 47%;
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  padding: 0.8em;
+  text-align: center; }
+  .modal-body-2.card-container .navbar, .modal-body-2.card-container .horizontal-separator,
+  .modal-body-2.card-container .items, .modal-body-2.card-container .total, .modal-body-2.card-container .details {
+    width: 100%; }
+  .modal-body-2.card-container .navbar {
+    display: flex; }
+    .modal-body-2.card-container .navbar.flex-column {
+      flex-direction: column; }
+    .modal-body-2.card-container .navbar p {
+      margin: 0.2em 0.5em;
+      position: relative !important; }
+    .modal-body-2.card-container .navbar p:first-child span {
+      position: inherit;
+      margin: 0px 0px 0px 100px;
+      display: block;
+      width: 5em;
+      height: 5em;
+      border: 1px solid white;
+      border-radius: 2.5em;
+      background: black; }
+      .modal-body-2.card-container .navbar p:first-child span i {
+        font-size: 4.5em;
+        color: white; }
+    .modal-body-2.card-container .navbar .creds p:nth-child(1) {
+      font-size: 2rem; }
+    .modal-body-2.card-container .navbar .creds p:nth-child(2) {
+      font-size: 1.3rem; }
+  .modal-body-2.card-container .horizontal-separator {
+    border: 2px solid #ddd;
+    width: 100%; }
+  .modal-body-2.card-container .horizontal-separator-1 {
+    border: 2px solid #ddd;
+    width: 94%;
+    position: absolute;
+    bottom: 20%; }
+  .modal-body-2.card-container .items {
+    max-height: 250px;
+    overflow-y: auto; }
+    .modal-body-2.card-container .items .item {
+      display: flex;
+      width: 100%;
+      justify-content: space-between; }
+      .modal-body-2.card-container .items .item .desc {
+        margin-bottom: 0.2em; }
+        .modal-body-2.card-container .items .item .desc span:first-child {
+          margin-right: 1em; }
+      .modal-body-2.card-container .items .item .price {
+        margin-bottom: 0.2em; }
+  .modal-body-2.card-container .thumb-img {
+    width: 50px; }
+  .modal-body-2.card-container .total {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    position: absolute;
+    bottom: 7%;
+    left: 0; }
+    .modal-body-2.card-container .total span {
+      display: block; }
+      .modal-body-2.card-container .total span.items {
+        font-size: 1.5em; }
+  .modal-body-2.card-container .button-pos {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    position: absolute;
+    bottom: 0;
+    left: 0; }
+  .modal-body-2.card-container button {
+    height: 2em;
+    background: #646464;
+    color: white;
+    font-size: 1.2rem; }
+  .modal-body-2.card-container .close {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 32px;
+    height: 32px;
+    opacity: 0.3; }
+  .modal-body-2.card-container .close:hover {
+    opacity: 1; }
+  .modal-body-2.card-container .close:before, .modal-body-2.card-container .close:after {
+    position: absolute;
+    left: 15px;
+    content: ' ';
+    height: 33px;
+    width: 2px;
+    background-color: #333; }
+  .modal-body-2.card-container .close:before {
+    transform: rotate(45deg); }
+  .modal-body-2.card-container .close:after {
+    transform: rotate(-45deg); }

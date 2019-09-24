@@ -1,9 +1,9 @@
 import React, { Component,Fragment } from 'react';
 import Tip from './Tip';
 import Card from './Card';
-import Modal from 'react-modal';
+// import Modal from 'react-modal';
 import Stats from './Stats';
-
+import Modal from './Modal';
 // import history from '../history';
 // import itemDetails from '../responses/CreateCart.json';
 // import customerDetails from '../responses/OrderSubmit.json';
@@ -11,7 +11,7 @@ import Stats from './Stats';
 const URL = 'wss://jcrj3k47g3.execute-api.us-east-1.amazonaws.com/Prod';
 
 
-Modal.setAppElement(document.querySelector('#root'));
+// Modal.setAppElement(document.querySelector('#root'));
 class Main extends Component {
 
     state = {
@@ -22,6 +22,8 @@ class Main extends Component {
         type : "",
         modalTotal:0,
         orderId:"",
+        modalStyle:true,
+        modalWidth:'80%'
     }
 
     ws = new WebSocket(URL)
@@ -57,28 +59,19 @@ class Main extends Component {
     }
 
     closeModal = () => {
-        this.setState({modalIsOpen: false})
+        this.setState({
+            modalIsOpen: false,
+            modalStyle:true
+        })
     }
 
-    // goToManage = ()=>{
-    //     history.push('/manage')
-    // }
+    goToManage = ()=>{
+        this.setState({
+            modalStyle:!this.state.modalStyle
+        })
+    }
 
     render() {
-        const  customStyles = {
-            content : {
-                top                   : '50%',
-                left                  : '50%',
-                right                 : '0',
-                bottom                : 'auto',
-                marginRight           : '-50%',
-                transform             : 'translate(35%, -50%)',
-                height: '80vh',
-                width: '30rem',
-                background:'transparent',
-                border:'none',
-            }
-        };
         return (
             <Fragment>
                 <Stats/>
@@ -94,7 +87,7 @@ class Main extends Component {
                                 key={index}
                             />   
                         )
-                    }):<div></div>:<div></div>}
+                    }):null:null}
                     {(this.state.type === "Checkout")? ((this.state.itemDetails !== undefined) && this.state.customerDetails.length > 0 )? this.state.itemDetails.map((items,index)=>{
                         return (
                             <Card 
@@ -106,7 +99,7 @@ class Main extends Component {
                                 key={index}
                             />   
                         )
-                    }):<div></div>:<div></div>}
+                    }):null:null}
                     {(this.state.type === "OrderConfirmed")? (this.state.customerDetails.length > 0 )? this.state.itemDetails.map((items,index)=>{
                         return (
                             <Card 
@@ -117,25 +110,24 @@ class Main extends Component {
                                 loyaltyId = {this.state.orderId}
                             />   
                         )
-                    }):<div></div>:<div></div>}
+                    }):null:null}
                     <Tip />
                 </div>
-                <Modal
+                <Modal 
                     isOpen={this.state.modalIsOpen}
-                    onAfterOpen={this.afterOpenModal}
                     onRequestClose={this.closeModal}
-                    style={customStyles}
-                    contentLabel="Example Modal"
+                    modalBody={this.state.modalStyle}
                 >
                     {(this.state.itemDetails !== undefined)?
-                        <Card 
-                            customerDetails={this.state.modalDetails}
-                            total={this.state.modalTotal}
-                            items={this.state.modalData} 
-                            closeModal={this.closeModal} 
-                            goToManage={this.goToManage} 
-                            isModal={this.state.modalIsOpen}
-                        />:<div></div>}
+                            <Card 
+                                customerDetails={this.state.modalDetails}
+                                total={this.state.modalTotal}
+                                items={this.state.modalData} 
+                                closeModal={this.closeModal} 
+                                goToManage={this.goToManage} 
+                                isModal={this.state.modalIsOpen}
+                                width={this.state.modalWidth}
+                            />:null}
                 </Modal>
             </Fragment>
         )
